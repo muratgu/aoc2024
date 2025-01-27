@@ -1,15 +1,3 @@
-
-Advent of Code
-
-    [About][Events][Shop][Settings][Log Out]
-
-(anonymous user #1403427) 33*
-   var y=2024;
-
-    [Calendar][AoC++][Sponsors][Leaderboard][Stats]
-
-Our sponsors help make Advent of Code possible:
-Infi - Er is slecht weer op komst en het is een lange tocht vanaf de Noordpool... Help jij de kerstman veilig door het luchtruim te navigeren?
 --- Day 18: RAM Run ---
 
 You and The Historians look a lot more pixelated than you remember. You're inside a computer at the North Pole!
@@ -75,8 +63,6 @@ OO.#OOO
 Simulate the first kilobyte (1024 bytes) falling onto your memory space. Afterward, what is the minimum number of steps needed to reach the exit?
 
 Your puzzle answer was 334.
-
-The first half of this puzzle is complete! It provides one gold star: *
 --- Part Two ---
 
 The Historians aren't as used to moving around in this pixelated universe as you are. You're afraid they're not going to be fast enough to make it to the exit before the path is completely blocked.
@@ -107,8 +93,6 @@ So, in this example, the coordinates of the first byte that prevents the exit fr
 
 Simulate more of the bytes that are about to corrupt your memory space. What are the coordinates of the first byte that will prevent the exit from being reachable from your starting position? (Provide the answer as two integers separated by a comma with no other characters.)
 
-Answer:
+Your puzzle answer was 20,12.
 
-Although it hasn't changed, you can still get your puzzle input.
-
-You can also [Shareon Bluesky Twitter Mastodon] this puzzle.
+Both parts of this puzzle are complete! They provide two gold stars: **
