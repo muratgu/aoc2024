@@ -11,8 +11,8 @@ def test_calc(target, source, ops):
             result = int(str(result) + source[i])
     return 'SUCCESS' if result == int(target) else 'FAILED', result
 
-with open("day07-input.txt", "r") as f:
-    lines = [list(line.strip().split(' ')) for line in f.readlines()]
+def solve(lines):
+    lines = [list(line.strip().split(' ')) for line in lines]
     table = []
     for line in lines:
         table.append({ 
@@ -27,10 +27,10 @@ with open("day07-input.txt", "r") as f:
         for ops in all_ops: 
             result, total = test_calc(item['target'], item['source'], ops)
             if result == 'SUCCESS':
-                print(item['target'], item['source'], ops, total)
+                #print(item['target'], item['source'], ops, total)
                 totals += total 
                 break
-    print('day07 part-1 answer', totals)
+    print('day07 part1', totals)
 
     totals = 0
     for item in table:
@@ -39,7 +39,11 @@ with open("day07-input.txt", "r") as f:
         for ops in all_ops: 
             result, total = test_calc(item['target'], item['source'], ops)
             if result == 'SUCCESS':
-                print(item['target'], item['source'], ops, total)
+                #print(item['target'], item['source'], ops, total)
                 totals += total 
                 break
-    print('day07 part-2 answer', totals)
+    print('day07 part2', totals)
+
+with open('day07-input.txt', 'r') as f:
+    lines = [line.strip() for line in f.readlines()]
+    solve(lines)

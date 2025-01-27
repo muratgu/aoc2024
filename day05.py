@@ -1,3 +1,40 @@
+def solve(lines):
+    rules = []
+    pages = []
+    i = 0
+    while len(lines[i].strip()) > 0:
+        rules.append([int(y) for y in lines[i].strip().split('|')])
+        i += 1
+    i+=1
+    pagelist = [[int(y) for y in line.strip().split(',')] for line in lines[i:]]
+
+    checksum = 0
+    failedlist = []
+    passedlist = []
+
+    for pages in pagelist:
+        if find_conflict(pages, rules):
+            failedlist += [pages]
+        else:
+            passedlist += [pages]
+            
+    print('day05 part1', sum(mid_page(p) for p in passedlist))
+
+    fixedlist = []
+    for pages in failedlist:
+        while True:
+            conflict = find_conflict(pages, rules)
+            if conflict:                
+                pages = rearrange(pages, conflict)                
+            else:
+                break
+        fixedlist += [pages]
+
+    for fixed in fixedlist:
+        if find_conflict(fixed, rules):
+            raise 'failed to resolve conflicts'
+
+    print('day05 part2', sum([mid_page(p) for p in fixedlist]))
 
 def find_conflict(pages, rules):
     for i in range(len(pages)):
@@ -26,45 +63,6 @@ def rearrange(pages, pair):
         pages = pages[:j] + [pages[i]] + pages[j:i] + pages[i+1:]
     return pages
 
-with open("day05-input.txt", "r") as f:
-    rules = []
-    pages = []
-    line = f.readline()
-    while len(line.strip()) > 0:
-        rules.append([int(y) for y in line.strip().split('|')])
-        line = f.readline()
-    pagelist = [[int(y) for y in line.strip().split(',')] for line in f.readlines()]
-
-    checksum = 0
-    failedlist = []
-    passedlist = []
-
-    for pages in pagelist:
-        if find_conflict(pages, rules):
-            failedlist += [pages]
-        else:
-            passedlist += [pages]
-            
-    print('checksum=', sum(mid_page(p) for p in passedlist))
-    # 6034
-    print('found %s to fix' % len(failedlist))
-    # 111
-    print('fixing...')
-
-    fixedlist = []
-    for pages in failedlist:
-        while True:
-            conflict = find_conflict(pages, rules)
-            if conflict:                
-                pages = rearrange(pages, conflict)                
-            else:
-                break
-        fixedlist += [pages]
-
-    for fixed in fixedlist:
-        if find_conflict(fixed, rules):
-            raise 'failed to resolve conflicts'
-
-    checksum = sum([mid_page(p) for p in fixedlist])
-    print('checksum=', checksum)
-    # 6305
+with open('day05-input.txt', 'r') as f:
+    lines = [line.strip() for line in f.readlines()]
+    solve(lines)

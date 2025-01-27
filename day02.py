@@ -1,3 +1,11 @@
+def solve(lines):
+    levels = [line.split() for line in lines]
+    
+    success = [is_safe(x) for x in levels]
+    print('day02 part1', sum(success))
+    
+    success = [is_safe(x, retry = True) for x in levels]
+    print('day02 part2', sum(success))
 
 def copy_except(a, i):
     if i < 0 or i > len(a)-1:
@@ -26,12 +34,6 @@ def is_safe(r, exclude = -1, retry = None):
                 return 0
     return 1
 
-with open("day02-input.txt", "r") as f:
-    lines = f.readlines()
-    levels = [line.split() for line in lines]
-    success = [is_safe(x) for x in levels]
-    print('day02 part-1 answer = ', sum(success))
-    # 299
-    success = [is_safe(x, retry = True) for x in levels]
-    print('day02 part-2 answer = ', sum(success))
-    # 364
+with open('day02-input.txt', 'r') as f:
+    lines = [line.strip() for line in f.readlines()]
+    solve(lines)

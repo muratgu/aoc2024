@@ -61,33 +61,35 @@ def display_path(room, path, obs=None):
         print(line)
     print("%s distinct steps" % len(set(path_xy)))
 
-import time
 
-with open("day06-input.txt", "r") as f:
-    room = [list(line.strip()) for line in f.readlines()]
+def solve(lines):
+    room = [list(line.strip()) for line in lines]
     result, path = walk_guard(room)
     path_xy = list(set([xyd[0] for xyd in path]))
 
-#display_path(room, path)
-print('%s x %s' % (len(room), len(room[0])))
-print(result, len(path_xy))
-# 4987
+    part1 = len(path_xy)
+    print('day06 part1', part1)
 
-obs = []
-gxy, gdir = where_is_the_guard(room)
-for i in range(len(path_xy)-1):
-    xy = path_xy[i+1] # next step
-    if xy == gxy: continue # skip guard location
-    x, y = xy
-    room[y][x] = 'O' # obstacle
-    result, _ = walk_guard(room)
-    room[y][x] = '.' # restore
-    if result == 'LOOP':
-        obs.append(xy)
-        #print('obstacle %s=%s' % (len(obs), xy))
-    else:
-        # print("no loop found")
-        pass
+    obs = []
+    gxy, gdir = where_is_the_guard(room)
+    for i in range(len(path_xy)-1):
+        xy = path_xy[i+1] # next step
+        if xy == gxy: continue # skip guard location
+        x, y = xy
+        room[y][x] = 'O' # obstacle
+        result, _ = walk_guard(room)
+        room[y][x] = '.' # restore
+        if result == 'LOOP':
+            obs.append(xy)
+            #print('obstacle %s=%s' % (len(obs), xy))
+        else:
+            #print("no loop found")
+            pass
 
-print('%s obstacle locations found to cause a loop' % len(obs))
-# 1697
+    #print('%s obstacle locations found to cause a loop' % len(obs))
+    part2 = len(obs)
+    print('day06 part2', part2)
+
+with open('day06-input.txt', 'r') as f:
+    lines = [line.strip() for line in f.readlines()]
+    solve(lines)

@@ -1,4 +1,12 @@
- 
+def solve(lines):
+    part1, part2 = 0, 0
+    for y in range(len(lines)):
+        for x in range(len(lines[0])):
+            part1 += scan_for(lines, 'XMAS', x, y)
+            part2 += scan_for_mas(lines, x, y)
+    print('day04 part1', part1)
+    print('day04 part2', part2)
+
 def scan_for(lines, word, x, y):
     
     def clamp(v, minv, maxv):
@@ -47,15 +55,6 @@ def scan_for_mas(lines, x, y):
 
     return 1 if n == 2 else 0
     
-with open("day04-input.txt", "r") as f:
+with open('day04-input.txt', 'r') as f:
     lines = [line.strip() for line in f.readlines()]
-    n, m = 0, 0
-    for y in range(len(lines)):
-        for x in range(len(lines[0])):
-            # part 1
-            n += scan_for(lines, 'XMAS', x, y)            
-            # 2336
-            # part 2
-            m += scan_for_mas(lines, x, y)
-            # 1831
-    print(n,m)
+    solve(lines)
